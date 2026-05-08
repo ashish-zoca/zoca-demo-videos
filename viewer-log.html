@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoca Demo - Viewer Log</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#240010;color:#FFF3E9;padding:40px}
+  h1{font-size:1.6rem;margin-bottom:20px;color:#FF6AAB}
+  table{width:100%;border-collapse:collapse;background:#3a0020;border-radius:10px;overflow:hidden}
+  th,td{padding:12px 16px;text-align:left;border-bottom:1px solid #5a0035;font-size:0.9rem}
+  th{background:#4a0030;color:#FF6AAB;font-weight:600}
+  td{opacity:0.8}
+  .empty{text-align:center;padding:40px;opacity:0.5}
+  .actions{margin-bottom:20px}
+  .actions button{padding:10px 20px;border:1px solid #5a0035;background:#3a0020;color:#FFF3E9;border-radius:8px;cursor:pointer;font-size:0.9rem;margin-right:10px}
+  .actions button:hover{border-color:#FF6AAB}
+</style>
+</head>
+<body>
+<h1>Zoca Demo Viewer Log</h1>
+<div class="actions">
+  <button onclick="exportCSV()">Export CSV</button>
+  <button onclick="clearLog()">Clear Log</button>
+</div>
+<table id="viewerTable">
+  <thead><tr><th>#</th><th>Email</th><th>First Viewed</th><th>Views</th><th>User Agent</th></tr></thead>
+  <tbody id="viewerBody"></tbody>
+</table>
+
+<script>
+function loadViewers() {
+  const viewers = JSON.parse(localStorage.getItem('zoca_viewers') || '[]');
+  const tbody = document.getElementById('viewerBody');
+
+  if (viewers.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty">No viewers yet</td></tr>';
+    return;
+  }
+
+  // Deduplicate by email, count views
+  const byEmail = {};
+  viewers.forEach(v => {
+    if (!byEmail[v.email]) {
+      byEmail[v.email] = { email: v.email, firstSeen: v.ts, views: 0, ua: v.ua };
+    }
+    byEmail[v.email].views++;
+  });
+
+  const sorted = Object.values(byEmail).sort((a, b) => new Date(b.firstSeen) - new Date(a.firstSeen));
+
+  tbody.innerHTML = sorted.map((v, i) =>
+    `<tr><td>${i + 1}</td><td>${v.email}</td><td>${new Date(v.firstSeen).toLocaleString()}</td><td>${v.views}</td><td>${v.ua.substring(0, 60)}...</td></tr>`
+  ).join('');
+}
+
+function exportCSV() {
+  const viewers = JSON.parse(localStorage.getItem('zoca_viewers') || '[]');
+  const byEmail = {};
+  viewers.forEach(v => {
+    if (!byEmail[v.email]) byEmail[v.email] = { email: v.email, firstSeen: v.ts, views: 0, ua: v.ua };
+    byEmail[v.email].views++;
+  });
+  const rows = [['Email', 'First Viewed', 'Total Views', 'User Agent']];
+  Object.values(byEmail).forEach(v => rows.push([v.email, v.firstSeen, v.views, v.ua]));
+  const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'zoca_demo_viewers.csv';
+  a.click();
+}
+
+function clearLog() {
+  if (confirm('Clear all viewer data?')) {
+    localStorage.removeItem('zoca_viewers');
+    loadViewers();
+  }
+}
+
+loadViewers();
+</script>
+</body>
+</html>

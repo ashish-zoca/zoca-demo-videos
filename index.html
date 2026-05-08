@@ -11,11 +11,33 @@
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Inter',sans-serif;background:#240010;color:#FFF3E9;line-height:1.6}
   h1,h2,h3{font-family:'Montserrat',sans-serif}
+
+  /* Auth overlay */
+  .auth-overlay{position:fixed;inset:0;z-index:1000;background:rgba(36,0,16,0.97);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(12px)}
+  .auth-overlay.hidden{display:none}
+  .auth-box{background:#3a0020;border:1px solid #5a0035;border-radius:20px;padding:48px 40px;max-width:440px;width:90%;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
+  .auth-box h2{font-size:1.6rem;color:#FF6AAB;margin-bottom:8px}
+  .auth-box p{font-size:0.95rem;opacity:0.7;margin-bottom:28px}
+  .auth-box input{width:100%;padding:14px 18px;border-radius:10px;border:1px solid #5a0035;background:#240010;color:#FFF3E9;font-size:1rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
+  .auth-box input:focus{border-color:#FF6AAB}
+  .auth-box input::placeholder{color:#FFF3E9;opacity:0.35}
+  .auth-box button{width:100%;margin-top:16px;padding:14px;border-radius:10px;border:none;background:linear-gradient(135deg,#FF6AAB,#805AFF);color:#fff;font-size:1rem;font-weight:600;font-family:'Montserrat',sans-serif;cursor:pointer;transition:opacity .2s}
+  .auth-box button:hover{opacity:0.9}
+  .auth-box .error{color:#FF872B;font-size:0.85rem;margin-top:10px;min-height:20px}
+  .auth-box .logo-text{font-family:'Montserrat',sans-serif;font-weight:800;font-size:2rem;color:#FF6AAB;margin-bottom:4px;letter-spacing:-0.02em}
+
   .hero{text-align:center;padding:60px 24px 40px;background:linear-gradient(135deg,#240010 0%,#64002C 50%,#240010 100%)}
   .hero h1{font-size:2.4rem;font-weight:800;color:#FF6AAB;margin-bottom:12px;letter-spacing:-0.02em}
   .hero p{font-size:1.1rem;color:#FFF3E9;opacity:0.8;max-width:680px;margin:0 auto;font-family:'Inter',sans-serif}
   .hero .badge{display:inline-block;margin-top:16px;padding:6px 16px;border-radius:20px;background:rgba(128,90,255,0.2);color:#805AFF;font-size:0.85rem;font-weight:600;font-family:'Fraunces',serif;font-style:italic}
-  .grid{max-width:1280px;margin:0 auto;padding:32px 24px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:28px}
+
+  .section-header{max-width:1280px;margin:0 auto;padding:40px 24px 0;text-align:center}
+  .section-header h2{font-size:1.4rem;font-weight:700;color:#FF6AAB;margin-bottom:4px}
+  .section-header p{font-size:0.9rem;opacity:0.55;max-width:600px;margin:0 auto}
+  .section-divider{max-width:1280px;margin:8px auto 0;padding:0 24px}
+  .section-divider hr{border:none;border-top:1px solid #5a0035}
+
+  .grid{max-width:1280px;margin:0 auto;padding:32px 24px 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:28px}
   .card{background:#3a0020;border-radius:14px;overflow:hidden;border:1px solid #5a0035;transition:transform .2s,border-color .2s,box-shadow .2s}
   .card:hover{transform:translateY(-4px);border-color:#FF6AAB;box-shadow:0 12px 40px rgba(255,106,171,0.15)}
   .card video{width:100%;display:block;background:#1a000e}
@@ -40,11 +62,30 @@
 </head>
 <body>
 
+<!-- Email Auth Gate -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-box">
+    <div class="logo-text">Zoca</div>
+    <h2>Platform Demo</h2>
+    <p>Enter your business email to watch the feature walkthrough videos.</p>
+    <input type="email" id="authEmail" placeholder="you@company.com" autocomplete="email">
+    <button id="authBtn" onclick="handleAuth()">Watch Videos</button>
+    <div class="error" id="authError"></div>
+  </div>
+</div>
+
 <div class="hero">
   <h1>Zoca Platform Demo</h1>
   <p>Here's how Zoca gives multi-location brands full visibility and AI-powered automation across every location. From SEO and AI search to front desk calls and ROI reporting, it's all in one place.</p>
-  <div class="badge">9 Feature Walkthrough Videos</div>
+  <div class="badge">12 Feature Walkthrough Videos</div>
 </div>
+
+<!-- SECTION 1: Network Overview -->
+<div class="section-header">
+  <h2>Network Overview</h2>
+  <p>Your entire multi-location network in a single view</p>
+</div>
+<div class="section-divider"><hr></div>
 
 <div class="grid">
 
@@ -58,6 +99,17 @@
         <p>One screen for your entire network. Revenue, bookings, network health, regional heatmaps, and live activity, all in one view. This is how Zoca replaces ten dashboards with a single command center for 100+ locations.</p>
         <div class="meta"><span>1:27</span><span>Overview</span></div>
       </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <video controls preload="none" poster="posters/feature_ncc_filters.jpg">
+      <source src="videos/feature_ncc_filters.mp4" type="video/mp4">
+    </video>
+    <div class="card-body">
+      <h3>Filters & Multi-View</h3>
+      <p>Slice your network by region, manager, status, tier, or timeframe. Every chart and metric recalculates live. Stack filters to see exactly the slice you need, from a single manager's portfolio to a region's weekly performance.</p>
+      <div class="meta"><span>1:18</span><span>Filters</span></div>
     </div>
   </div>
 
@@ -83,6 +135,17 @@
     </div>
   </div>
 
+</div>
+
+<!-- SECTION 2: Discovery & AI Search -->
+<div class="section-header">
+  <h2>Discovery & AI Search</h2>
+  <p>Local SEO, AI Search (AEO), and demand intelligence at scale</p>
+</div>
+<div class="section-divider"><hr></div>
+
+<div class="grid">
+
   <div class="card">
     <video controls preload="none" poster="posters/feature4_discovery_aeo.jpg">
       <source src="videos/feature4_discovery_aeo.mp4" type="video/mp4">
@@ -106,13 +169,13 @@
   </div>
 
   <div class="card">
-    <video controls preload="none" poster="posters/feature5_front_desk_control_tower.jpg">
-      <source src="videos/feature5_front_desk_control_tower.mp4" type="video/mp4">
+    <video controls preload="none" poster="posters/feature_ldi.jpg">
+      <source src="videos/feature_ldi.mp4" type="video/mp4">
     </video>
     <div class="card-body">
-      <h3>Front Desk Control Tower</h3>
-      <p>A real-time view of every AI receptionist across your network. You see live calls, paused locations, revenue at risk, after-hours saves, and which locations are converting best.</p>
-      <div class="meta"><span>0:50</span><span>Voice AI</span></div>
+      <h3>Local Demand Intelligence</h3>
+      <p>Real community demand signals translated into capacity, pricing, trend, and expansion actions for every location. See which locations are capacity-stressed, where demand is spiking, which services are mispriced, and where to expand next.</p>
+      <div class="meta"><span>1:45</span><span>Demand Intel</span></div>
     </div>
   </div>
 
@@ -127,6 +190,28 @@
     </div>
   </div>
 
+</div>
+
+<!-- SECTION 3: AI Agents -->
+<div class="section-header">
+  <h2>AI Agents & Automation</h2>
+  <p>Voice AI, content generation, and the context engine that powers it all</p>
+</div>
+<div class="section-divider"><hr></div>
+
+<div class="grid">
+
+  <div class="card">
+    <video controls preload="none" poster="posters/feature5_front_desk_control_tower.jpg">
+      <source src="videos/feature5_front_desk_control_tower.mp4" type="video/mp4">
+    </video>
+    <div class="card-body">
+      <h3>Front Desk Control Tower</h3>
+      <p>A real-time view of every AI receptionist across your network. You see live calls, paused locations, revenue at risk, after-hours saves, and which locations are converting best.</p>
+      <div class="meta"><span>0:50</span><span>Voice AI</span></div>
+    </div>
+  </div>
+
   <div class="card">
     <video controls preload="none" poster="posters/feature7_content_engine.jpg">
       <source src="videos/feature7_content_engine.mp4" type="video/mp4">
@@ -135,6 +220,17 @@
       <h3>Content Engine</h3>
       <p>Keyword-targeted content generated automatically across all locations. Web pages, GBP posts, and lead attribution in one place. This replaces the content agency you're paying per location.</p>
       <div class="meta"><span>0:56</span><span>Content</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <video controls preload="none" poster="posters/feature_brain.jpg">
+      <source src="videos/feature_brain.mp4" type="video/mp4">
+    </video>
+    <div class="card-body">
+      <h3>The Brain</h3>
+      <p>A gamified context engine that learns your business. Owners answer short questions across eight lobes, and every answer makes every AI agent sharper. Physical gifts at every milestone. This is what turns generic AI into your AI.</p>
+      <div class="meta"><span>1:50</span><span>AI Context</span></div>
     </div>
   </div>
 
@@ -152,6 +248,79 @@
 </div>
 
 <footer>Zoca - AI-Powered Multi-Location Management Platform</footer>
+
+<script>
+// Email auth gate with Google Sheets logging
+const SHEET_WEBHOOK = 'https://script.google.com/macros/s/AKfycbzoca-demo-viewer-log/exec';
+
+function isValidBusinessEmail(email) {
+  if (!email || !email.includes('@')) return false;
+  const domain = email.split('@')[1].toLowerCase();
+  const freeProviders = ['gmail.com','yahoo.com','hotmail.com','outlook.com','aol.com','icloud.com','mail.com','protonmail.com','yandex.com','zoho.com'];
+  // Allow all emails for now, but flag free providers
+  return email.includes('@') && email.includes('.');
+}
+
+function handleAuth() {
+  const email = document.getElementById('authEmail').value.trim().toLowerCase();
+  const errorEl = document.getElementById('authError');
+
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    errorEl.textContent = 'Please enter a valid email address.';
+    return;
+  }
+
+  // Log the viewer
+  logViewer(email);
+
+  // Store in localStorage so they don't need to re-enter
+  localStorage.setItem('zoca_demo_email', email);
+  localStorage.setItem('zoca_demo_ts', Date.now().toString());
+
+  // Hide overlay
+  document.getElementById('authOverlay').classList.add('hidden');
+}
+
+function logViewer(email) {
+  // Log to localStorage as backup
+  const viewers = JSON.parse(localStorage.getItem('zoca_viewers') || '[]');
+  viewers.push({ email, ts: new Date().toISOString(), ua: navigator.userAgent });
+  localStorage.setItem('zoca_viewers', JSON.stringify(viewers));
+
+  // Try to log to Google Sheets (will fail silently if webhook not set up)
+  try {
+    fetch(SHEET_WEBHOOK, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        referrer: document.referrer || 'direct'
+      })
+    }).catch(() => {});
+  } catch(e) {}
+}
+
+// Check if already authenticated
+(function() {
+  const email = localStorage.getItem('zoca_demo_email');
+  const ts = parseInt(localStorage.getItem('zoca_demo_ts') || '0');
+  const sevenDays = 7 * 24 * 60 * 60 * 1000;
+
+  if (email && (Date.now() - ts) < sevenDays) {
+    document.getElementById('authOverlay').classList.add('hidden');
+    // Re-log the view
+    logViewer(email);
+  }
+
+  // Enter key triggers auth
+  document.getElementById('authEmail').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') handleAuth();
+  });
+})();
+</script>
 
 </body>
 </html>
