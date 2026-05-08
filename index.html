@@ -3,61 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zoca Platform Demo - Feature Walkthrough Videos</title>
+<title>Zoca Platform Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600;1,9..144,700&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Inter',sans-serif;background:#240010;color:#FFF3E9;line-height:1.6}
-  h1,h2,h3{font-family:'Montserrat',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#1a0a10;color:#FFF3E9;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Montserrat',sans-serif}
 
-  /* Auth overlay */
-  .auth-overlay{position:fixed;inset:0;z-index:1000;background:rgba(36,0,16,0.97);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(12px)}
-  .auth-overlay.hidden{display:none}
-  .auth-box{background:#3a0020;border:1px solid #5a0035;border-radius:20px;padding:48px 40px;max-width:440px;width:90%;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,0.5)}
-  .auth-box h2{font-size:1.6rem;color:#FF6AAB;margin-bottom:8px}
-  .auth-box p{font-size:0.95rem;opacity:0.7;margin-bottom:28px}
-  .auth-box input{width:100%;padding:14px 18px;border-radius:10px;border:1px solid #5a0035;background:#240010;color:#FFF3E9;font-size:1rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
-  .auth-box input:focus{border-color:#FF6AAB}
-  .auth-box input::placeholder{color:#FFF3E9;opacity:0.35}
-  .auth-box button{width:100%;margin-top:16px;padding:14px;border-radius:10px;border:none;background:linear-gradient(135deg,#FF6AAB,#805AFF);color:#fff;font-size:1rem;font-weight:600;font-family:'Montserrat',sans-serif;cursor:pointer;transition:opacity .2s}
-  .auth-box button:hover{opacity:0.9}
-  .auth-box .error{color:#FF872B;font-size:0.85rem;margin-top:10px;min-height:20px}
-  .auth-box .logo-text{font-family:'Montserrat',sans-serif;font-weight:800;font-size:2rem;color:#FF6AAB;margin-bottom:4px;letter-spacing:-0.02em}
+/* Auth overlay */
+.auth-overlay{position:fixed;inset:0;z-index:1000;background:rgba(26,10,16,0.97);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(16px)}
+.auth-overlay.hidden{display:none}
+.auth-box{background:linear-gradient(145deg,#2a0018,#1a0a10);border:1px solid rgba(255,106,171,0.15);border-radius:24px;padding:56px 44px;max-width:460px;width:90%;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,0.6)}
+.auth-box .logo-text{font-family:'Montserrat',sans-serif;font-weight:900;font-size:2.2rem;color:#FF6AAB;margin-bottom:4px;letter-spacing:-0.03em}
+.auth-box h2{font-size:1.3rem;color:#FFF3E9;opacity:0.9;margin-bottom:8px;font-weight:600}
+.auth-box p{font-size:0.95rem;opacity:0.5;margin-bottom:32px;line-height:1.5}
+.auth-box input{width:100%;padding:16px 20px;border-radius:12px;border:1px solid rgba(255,106,171,0.2);background:rgba(255,255,255,0.04);color:#FFF3E9;font-size:1rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
+.auth-box input:focus{border-color:#FF6AAB}
+.auth-box input::placeholder{color:#FFF3E9;opacity:0.3}
+.auth-box button{width:100%;margin-top:16px;padding:16px;border-radius:12px;border:none;background:#FF6AAB;color:#1a0a10;font-size:1rem;font-weight:700;font-family:'Montserrat',sans-serif;cursor:pointer;transition:all .2s;letter-spacing:-0.01em}
+.auth-box button:hover{background:#ff7fb8;transform:translateY(-1px)}
+.auth-box .error{color:#FF872B;font-size:0.85rem;margin-top:12px;min-height:20px}
 
-  .hero{text-align:center;padding:60px 24px 40px;background:linear-gradient(135deg,#240010 0%,#64002C 50%,#240010 100%)}
-  .hero h1{font-size:2.4rem;font-weight:800;color:#FF6AAB;margin-bottom:12px;letter-spacing:-0.02em}
-  .hero p{font-size:1.1rem;color:#FFF3E9;opacity:0.8;max-width:680px;margin:0 auto;font-family:'Inter',sans-serif}
-  .hero .badge{display:inline-block;margin-top:16px;padding:6px 16px;border-radius:20px;background:rgba(128,90,255,0.2);color:#805AFF;font-size:0.85rem;font-weight:600;font-family:'Fraunces',serif;font-style:italic}
+/* Hero */
+.hero{text-align:center;padding:100px 24px 80px;background:radial-gradient(ellipse at 50% 0%,#4a0028 0%,#2a0018 40%,#1a0a10 70%);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(255,106,171,0.08) 0%,transparent 60%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);font-size:0.8rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,243,233,0.7);margin-bottom:48px}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#FF6AAB;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero h1{font-size:clamp(3rem,8vw,6.5rem);font-weight:900;color:#FFF3E9;line-height:0.95;letter-spacing:-0.04em;margin-bottom:40px}
+.hero h1 em{font-family:'Fraunces',serif;font-style:italic;font-weight:700;color:#FFD700}
+.hero-sub{font-size:1.15rem;color:rgba(255,243,233,0.55);max-width:620px;margin:0 auto 44px;line-height:1.7}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:100px;background:#FF6AAB;color:#1a0a10;font-size:1rem;font-weight:700;font-family:'Montserrat',sans-serif;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
+.btn-primary:hover{background:#ff7fb8;transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,106,171,0.3)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:100px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#FFF3E9;font-size:1rem;font-weight:600;font-family:'Montserrat',sans-serif;text-decoration:none;transition:all .2s;cursor:pointer}
+.btn-secondary:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2)}
+.hero-pill{display:inline-flex;align-items:center;gap:10px;padding:10px 24px;border-radius:100px;background:rgba(255,106,171,0.12);font-size:0.95rem;color:#FF6AAB}
+.hero-pill .count{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#FF6AAB;color:#1a0a10;font-weight:700;font-size:0.85rem;font-family:'Montserrat',sans-serif}
+.hero-pill span{font-family:'Fraunces',serif;font-style:italic;font-weight:600}
 
-  .section-header{max-width:1280px;margin:0 auto;padding:40px 24px 0;text-align:center}
-  .section-header h2{font-size:1.4rem;font-weight:700;color:#FF6AAB;margin-bottom:4px}
-  .section-header p{font-size:0.9rem;opacity:0.55;max-width:600px;margin:0 auto}
-  .section-divider{max-width:1280px;margin:8px auto 0;padding:0 24px}
-  .section-divider hr{border:none;border-top:1px solid #5a0035}
+/* Chapter sections */
+.chapter{max-width:1200px;margin:0 auto;padding:80px 24px 0}
+.chapter-header{display:grid;grid-template-columns:200px 1fr;gap:40px;margin-bottom:48px;align-items:end}
+.chapter-meta{padding-bottom:12px}
+.chapter-num{font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,243,233,0.35);margin-bottom:8px}
+.chapter-label{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:rgba(255,243,233,0.5)}
+.chapter-title{font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;color:#E8A0B8;line-height:0.95;letter-spacing:-0.03em}
+.chapter-title em{font-family:'Fraunces',serif;font-style:italic;font-weight:700}
+.chapter-desc{max-width:700px;font-size:1.05rem;color:rgba(255,243,233,0.5);line-height:1.7;margin-top:16px}
+.chapter-divider{height:1px;background:linear-gradient(90deg,rgba(255,106,171,0.2),rgba(255,106,171,0.05));margin-bottom:48px}
 
-  .grid{max-width:1280px;margin:0 auto;padding:32px 24px 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:28px}
-  .card{background:#3a0020;border-radius:14px;overflow:hidden;border:1px solid #5a0035;transition:transform .2s,border-color .2s,box-shadow .2s}
-  .card:hover{transform:translateY(-4px);border-color:#FF6AAB;box-shadow:0 12px 40px rgba(255,106,171,0.15)}
-  .card video{width:100%;display:block;background:#1a000e}
-  .card-body{padding:18px 20px 20px}
-  .card-body h3{font-size:1.15rem;font-weight:700;color:#FFF3E9;margin-bottom:6px}
-  .card-body p{font-size:0.88rem;color:#FFF3E9;opacity:0.65;line-height:1.5}
-  .card-body .meta{display:flex;gap:10px;margin-top:10px;font-size:0.78rem;color:#FF872B;font-family:'Fraunces',serif;font-style:italic}
-  .card-body .meta span{display:flex;align-items:center;gap:4px}
-  .featured{grid-column:1/-1}
-  .featured .inner{display:grid;grid-template-columns:1.6fr 1fr;gap:0;background:#3a0020;border-radius:14px;overflow:hidden;border:1px solid #5a0035}
-  .featured video{width:100%;height:100%;object-fit:cover}
-  .featured .card-body{padding:32px 28px;display:flex;flex-direction:column;justify-content:center}
-  .featured .card-body h3{font-size:1.5rem;margin-bottom:10px}
-  .featured .card-body p{font-size:0.95rem;opacity:0.75}
-  @media(max-width:800px){
-    .grid{grid-template-columns:1fr}
-    .featured .inner{grid-template-columns:1fr}
-    .hero h1{font-size:1.8rem}
-  }
-  footer{text-align:center;padding:32px;color:#FFF3E9;opacity:0.35;font-size:0.82rem;border-top:1px solid #5a0035}
+/* Video items */
+.video-item{margin-bottom:56px}
+.video-item:last-child{margin-bottom:0}
+.video-frame{border-radius:16px;overflow:hidden;background:#0d0508;border:1px solid rgba(255,255,255,0.06);box-shadow:0 16px 60px rgba(0,0,0,0.4)}
+.video-frame video{width:100%;display:block;background:#0d0508}
+.video-info{display:flex;align-items:baseline;gap:16px;margin-top:16px;padding:0 4px}
+.video-info h3{font-size:1.1rem;font-weight:700;color:#FFF3E9}
+.video-info .dur{font-family:'Fraunces',serif;font-style:italic;font-size:0.85rem;color:rgba(255,106,171,0.7)}
+.video-desc{font-size:0.92rem;color:rgba(255,243,233,0.45);margin-top:6px;padding:0 4px;max-width:720px;line-height:1.6}
+
+/* Two-col grid for smaller videos */
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:56px}
+.video-grid .video-item{margin-bottom:0}
+
+/* Featured (full-width hero video) */
+.video-featured{margin-bottom:48px}
+.video-featured .video-frame{border:1px solid rgba(255,106,171,0.12)}
+
+/* Footer */
+footer{text-align:center;padding:60px 24px;color:rgba(255,243,233,0.2);font-size:0.82rem;margin-top:80px;border-top:1px solid rgba(255,255,255,0.05)}
+
+@media(max-width:900px){
+  .chapter-header{grid-template-columns:1fr;gap:16px}
+  .chapter-meta{display:flex;gap:16px;align-items:baseline;padding-bottom:0}
+  .video-grid{grid-template-columns:1fr}
+  .hero{padding:60px 20px 50px}
+  .chapter{padding:48px 20px 0}
+}
 </style>
 </head>
 <body>
@@ -74,259 +99,273 @@
   </div>
 </div>
 
-<div class="hero">
-  <h1>Zoca Platform Demo</h1>
-  <p>Here's how Zoca gives multi-location brands full visibility and AI-powered automation across every location. From SEO and AI search to front desk calls and ROI reporting, it's all in one place.</p>
-  <div class="badge">13 Feature Walkthrough Videos</div>
-</div>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> Platform Demo &middot; 2025</div>
+  <h1>The platform<br>behind <em>every</em><br>location.</h1>
+  <p class="hero-sub">Zoca gives multi-location brands full visibility and AI-powered automation across every storefront. From SEO and AI search to front-desk calls and ROI reporting &mdash; all in one place.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#chapter-1">Watch the tour &rarr;</a>
+    <a class="btn-secondary" href="mailto:ashish@timelyai.com">Book a demo</a>
+  </div>
+  <div class="hero-pill"><span class="count">13</span> <span>Feature walkthrough videos</span></div>
+</section>
 
-<!-- SECTION 1: Network Overview -->
-<div class="section-header">
-  <h2>Network Overview</h2>
-  <p>Your entire multi-location network in a single view</p>
-</div>
-<div class="section-divider"><hr></div>
+<!-- ============================================================ -->
+<!-- CHAPTER 1: NETWORK -->
+<!-- ============================================================ -->
+<section class="chapter" id="chapter-1">
+  <div class="chapter-header">
+    <div class="chapter-meta">
+      <div class="chapter-num">01 &middot; Network</div>
+      <div class="chapter-label">Chapter one</div>
+    </div>
+    <div>
+      <h2 class="chapter-title">Network <em>Overview</em></h2>
+      <p class="chapter-desc">Your entire multi-location network in a single view. One screen for revenue, bookings, network health, regional heatmaps, and live activity.</p>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
 
-<div class="grid">
-
-  <div class="featured">
-    <div class="inner">
+  <div class="video-featured">
+    <div class="video-frame">
       <video controls preload="metadata" poster="posters/feature1_network_command_center.jpg">
         <source src="videos/feature1_network_command_center.mp4" type="video/mp4">
       </video>
-      <div class="card-body">
-        <h3>Network Command Center</h3>
-        <p>One screen for your entire network. Revenue, bookings, network health, regional heatmaps, and live activity, all in one view. This is how Zoca replaces ten dashboards with a single command center for 100+ locations.</p>
-        <div class="meta"><span>1:27</span><span>Overview</span></div>
+    </div>
+    <div class="video-info">
+      <h3>Network Command Center</h3>
+      <span class="dur">1:27</span>
+    </div>
+    <p class="video-desc">One screen for your entire network. Revenue, bookings, network health, regional heatmaps, and live activity. This is how Zoca replaces ten dashboards with a single command center for 100+ locations.</p>
+  </div>
+
+  <div class="video-grid">
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/feature_ncc_filters.jpg">
+          <source src="videos/feature_ncc_filters.mp4" type="video/mp4">
+        </video>
       </div>
+      <div class="video-info">
+        <h3>Filters & Multi-View</h3>
+        <span class="dur">1:18</span>
+      </div>
+      <p class="video-desc">Slice your network by region, manager, status, tier, or timeframe. Every chart recalculates live.</p>
+    </div>
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/feature2_growth_command.jpg">
+          <source src="videos/feature2_growth_command.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>Growth Command</h3>
+        <span class="dur">1:03</span>
+      </div>
+      <p class="video-desc">Your marketing war room. Unified growth funnel, channel health scores, and AI-generated playbooks.</p>
+    </div>
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/feature3_brand_vs_locations.jpg">
+          <source src="videos/feature3_brand_vs_locations.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>Brand vs Locations</h3>
+        <span class="dur">0:56</span>
+      </div>
+      <p class="video-desc">Every location benchmarked against your brand average. Under-performers surface with one-click fixes.</p>
     </div>
   </div>
+</section>
 
-  <div class="card">
-    <video controls preload="metadata" poster="posters/feature_ncc_filters.jpg">
-      <source src="videos/feature_ncc_filters.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>Filters & Multi-View</h3>
-      <p>Slice your network by region, manager, status, tier, or timeframe. Every chart and metric recalculates live. Stack filters to see exactly the slice you need, from a single manager's portfolio to a region's weekly performance.</p>
-      <div class="meta"><span>1:18</span><span>Filters</span></div>
+<!-- ============================================================ -->
+<!-- CHAPTER 2: DISCOVERY -->
+<!-- ============================================================ -->
+<section class="chapter" id="chapter-2">
+  <div class="chapter-header">
+    <div class="chapter-meta">
+      <div class="chapter-num">02 &middot; Discovery</div>
+      <div class="chapter-label">Chapter two</div>
+    </div>
+    <div>
+      <h2 class="chapter-title">Discovery &<br><em>AI Search</em></h2>
+      <p class="chapter-desc">Local SEO, AI Search (AEO), and demand intelligence at scale. Track keyword rankings and AI engine mentions across all your locations.</p>
     </div>
   </div>
+  <div class="chapter-divider"></div>
 
-  <div class="card">
-    <video controls preload="metadata" poster="posters/feature2_growth_command.jpg">
-      <source src="videos/feature2_growth_command.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>Growth Command</h3>
-      <p>Think of this as your marketing war room. You get a unified growth funnel, channel health scores, and AI-generated one-click playbooks that fix issues across all locations.</p>
-      <div class="meta"><span>1:03</span><span>Marketing</span></div>
+  <div class="video-grid">
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/feature4_discovery_aeo.jpg">
+          <source src="videos/feature4_discovery_aeo.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>Discovery & AI Search</h3>
+        <span class="dur">1:04</span>
+      </div>
+      <p class="video-desc">Replaces Bright Local and SEMrush. Local SEO and AI Search (AEO) tracked in one place across all locations.</p>
+    </div>
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/feature_aeo_deep_dive_v2.jpg">
+          <source src="videos/feature_aeo_deep_dive_v2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>AI Search (AEO) Deep Dive</h3>
+        <span class="dur">1:37</span>
+      </div>
+      <p class="video-desc">Engine breakdown, question coverage, citation share, competitors cited, and an actionable playbook.</p>
+    </div>
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/feature_ldi.jpg">
+          <source src="videos/feature_ldi.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>Local Demand Intelligence</h3>
+        <span class="dur">1:45</span>
+      </div>
+      <p class="video-desc">Community demand signals translated into capacity, pricing, trend, and expansion actions for every location.</p>
+    </div>
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/feature6_per_location_health.jpg">
+          <source src="videos/feature6_per_location_health.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>Per-Location Health</h3>
+        <span class="dur">0:54</span>
+      </div>
+      <p class="video-desc">Every location scored on GBP completeness, reviews, star ratings, keywords, and posting frequency.</p>
     </div>
   </div>
+</section>
 
-  <div class="card">
-    <video controls preload="metadata" poster="posters/feature3_brand_vs_locations.jpg">
-      <source src="videos/feature3_brand_vs_locations.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>Brand vs Locations</h3>
-      <p>Every location benchmarked against your brand average. Under-performers surface automatically, and each one gets a specific fix you can apply with one click.</p>
-      <div class="meta"><span>0:56</span><span>Benchmarking</span></div>
+<!-- ============================================================ -->
+<!-- CHAPTER 3: AI AGENTS -->
+<!-- ============================================================ -->
+<section class="chapter" id="chapter-3">
+  <div class="chapter-header">
+    <div class="chapter-meta">
+      <div class="chapter-num">03 &middot; AI Agents</div>
+      <div class="chapter-label">Chapter three</div>
+    </div>
+    <div>
+      <h2 class="chapter-title">AI Agents &<br><em>Automation</em></h2>
+      <p class="chapter-desc">Voice AI, content generation, the context engine that powers it all, and the reports that prove ROI.</p>
     </div>
   </div>
+  <div class="chapter-divider"></div>
 
-</div>
-
-<!-- SECTION 2: Discovery & AI Search -->
-<div class="section-header">
-  <h2>Discovery & AI Search</h2>
-  <p>Local SEO, AI Search (AEO), and demand intelligence at scale</p>
-</div>
-<div class="section-divider"><hr></div>
-
-<div class="grid">
-
-  <div class="card">
-    <video controls preload="metadata" poster="posters/feature4_discovery_aeo.jpg">
-      <source src="videos/feature4_discovery_aeo.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>Discovery & AI Search</h3>
-      <p>This replaces Bright Local and SEMrush. Zoca tracks local SEO and AI Search (AEO) in one place, so you can see keyword rankings and AI engine mentions across all your locations.</p>
-      <div class="meta"><span>1:04</span><span>SEO & AEO</span></div>
+  <div class="video-grid">
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/feature5_front_desk_control_tower.jpg">
+          <source src="videos/feature5_front_desk_control_tower.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>Front Desk Control Tower</h3>
+        <span class="dur">0:50</span>
+      </div>
+      <p class="video-desc">Real-time view of every AI receptionist. Live calls, paused locations, revenue at risk, and after-hours saves.</p>
+    </div>
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/feature7_content_engine.jpg">
+          <source src="videos/feature7_content_engine.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>Content Engine</h3>
+        <span class="dur">0:56</span>
+      </div>
+      <p class="video-desc">Keyword-targeted content generated automatically. Web pages, GBP posts, and lead attribution in one place.</p>
+    </div>
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/poster_brain_multi.jpg">
+          <source src="videos/feature_brain_multi.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>The Brain: Network Level</h3>
+        <span class="dur">2:20</span>
+      </div>
+      <p class="video-desc">Brain aggregates context across all locations. Neural canvas, agent impact scores, milestone rewards, and the Memory Vault.</p>
+    </div>
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/poster_brain_single.jpg">
+          <source src="videos/feature_brain_single.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>The Brain: Single Location</h3>
+        <span class="dur">1:52</span>
+      </div>
+      <p class="video-desc">Click a lobe, answer five questions, watch the neural canvas light up. Every answer sharpens every AI agent.</p>
+    </div>
+    <div class="video-item">
+      <div class="video-frame">
+        <video controls preload="metadata" poster="posters/feature8_roi_reports.jpg">
+          <source src="videos/feature8_roi_reports.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-info">
+        <h3>ROI Reports</h3>
+        <span class="dur">1:04</span>
+      </div>
+      <p class="video-desc">Bottom-line impact, after-hours saves, spam blocked, and a 65x ROI multiple. Auto-generated, zero manual work.</p>
     </div>
   </div>
+</section>
 
-  <div class="card">
-    <video controls preload="metadata" poster="posters/feature_aeo_deep_dive_v2.jpg">
-      <source src="videos/feature_aeo_deep_dive_v2.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>AI Search (AEO) Deep Dive</h3>
-      <p>A closer look at the full AEO module: engine breakdown, question coverage, citation share, competitors cited, and an actionable playbook. This is the future of search, tracked at scale.</p>
-      <div class="meta"><span>1:37</span><span>AEO</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <video controls preload="metadata" poster="posters/feature_ldi.jpg">
-      <source src="videos/feature_ldi.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>Local Demand Intelligence</h3>
-      <p>Real community demand signals translated into capacity, pricing, trend, and expansion actions for every location. See which locations are capacity-stressed, where demand is spiking, which services are mispriced, and where to expand next.</p>
-      <div class="meta"><span>1:45</span><span>Demand Intel</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <video controls preload="metadata" poster="posters/feature6_per_location_health.jpg">
-      <source src="videos/feature6_per_location_health.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>Per-Location Discovery Health</h3>
-      <p>Every location scored on GBP completeness, reviews, star ratings, keyword rankings, and posting frequency. It's the spreadsheet your team was updating manually, but live and automated.</p>
-      <div class="meta"><span>0:54</span><span>Health Scores</span></div>
-    </div>
-  </div>
-
-</div>
-
-<!-- SECTION 3: AI Agents -->
-<div class="section-header">
-  <h2>AI Agents & Automation</h2>
-  <p>Voice AI, content generation, and the context engine that powers it all</p>
-</div>
-<div class="section-divider"><hr></div>
-
-<div class="grid">
-
-  <div class="card">
-    <video controls preload="metadata" poster="posters/feature5_front_desk_control_tower.jpg">
-      <source src="videos/feature5_front_desk_control_tower.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>Front Desk Control Tower</h3>
-      <p>A real-time view of every AI receptionist across your network. You see live calls, paused locations, revenue at risk, after-hours saves, and which locations are converting best.</p>
-      <div class="meta"><span>0:50</span><span>Voice AI</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <video controls preload="metadata" poster="posters/feature7_content_engine.jpg">
-      <source src="videos/feature7_content_engine.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>Content Engine</h3>
-      <p>Keyword-targeted content generated automatically across all locations. Web pages, GBP posts, and lead attribution in one place. This replaces the content agency you're paying per location.</p>
-      <div class="meta"><span>0:56</span><span>Content</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <video controls preload="metadata" poster="posters/poster_brain_multi.jpg">
-      <source src="videos/feature_brain_multi.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>The Brain: Network Level</h3>
-      <p>At the network level, the Brain aggregates context across all locations. Neural canvas, agent impact scores, milestone rewards, and the Memory Vault. See how every lobe feeds every AI agent across 100+ locations.</p>
-      <div class="meta"><span>2:20</span><span>AI Context</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <video controls preload="metadata" poster="posters/poster_brain_single.jpg">
-      <source src="videos/feature_brain_single.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>The Brain: Single Location</h3>
-      <p>What an individual studio owner sees. Click a lobe, answer five questions, and watch the neural canvas light up. Every answer sharpens every AI agent. Fill enough lobes and the milestone gifts start arriving.</p>
-      <div class="meta"><span>1:52</span><span>AI Context</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <video controls preload="metadata" poster="posters/feature8_roi_reports.jpg">
-      <source src="videos/feature8_roi_reports.mp4" type="video/mp4">
-    </video>
-    <div class="card-body">
-      <h3>ROI Reports</h3>
-      <p>The report that gets your CEO to renew the contract. Bottom-line impact, after-hours saves, spam blocked, and a 65x ROI multiple. Auto-generated, zero manual work.</p>
-      <div class="meta"><span>1:04</span><span>Reporting</span></div>
-    </div>
-  </div>
-
-</div>
-
-<footer>Zoca - AI-Powered Multi-Location Management Platform</footer>
+<footer>Zoca &mdash; AI-Powered Multi-Location Management Platform</footer>
 
 <script>
-// Email auth gate with Google Sheets logging
 const SHEET_WEBHOOK = 'https://script.google.com/macros/s/AKfycbzoca-demo-viewer-log/exec';
-
-function isValidBusinessEmail(email) {
-  if (!email || !email.includes('@')) return false;
-  const domain = email.split('@')[1].toLowerCase();
-  const freeProviders = ['gmail.com','yahoo.com','hotmail.com','outlook.com','aol.com','icloud.com','mail.com','protonmail.com','yandex.com','zoho.com'];
-  // Allow all emails for now, but flag free providers
-  return email.includes('@') && email.includes('.');
-}
 
 function handleAuth() {
   const email = document.getElementById('authEmail').value.trim().toLowerCase();
   const errorEl = document.getElementById('authError');
-
   if (!email || !email.includes('@') || !email.includes('.')) {
     errorEl.textContent = 'Please enter a valid email address.';
     return;
   }
-
-  // Log the viewer
   logViewer(email);
-
-  // Store in localStorage so they don't need to re-enter
   localStorage.setItem('zoca_demo_email', email);
   localStorage.setItem('zoca_demo_ts', Date.now().toString());
-
-  // Hide overlay
   document.getElementById('authOverlay').classList.add('hidden');
 }
 
 function logViewer(email) {
-  // Log to localStorage as backup
   const viewers = JSON.parse(localStorage.getItem('zoca_viewers') || '[]');
   viewers.push({ email, ts: new Date().toISOString(), ua: navigator.userAgent });
   localStorage.setItem('zoca_viewers', JSON.stringify(viewers));
-
-  // Try to log to Google Sheets (will fail silently if webhook not set up)
   try {
     fetch(SHEET_WEBHOOK, {
-      method: 'POST',
-      mode: 'no-cors',
+      method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        referrer: document.referrer || 'direct'
-      })
+      body: JSON.stringify({ email, timestamp: new Date().toISOString(), userAgent: navigator.userAgent, referrer: document.referrer || 'direct' })
     }).catch(() => {});
   } catch(e) {}
 }
 
-// Check if already authenticated
 (function() {
   const email = localStorage.getItem('zoca_demo_email');
   const ts = parseInt(localStorage.getItem('zoca_demo_ts') || '0');
-  const sevenDays = 7 * 24 * 60 * 60 * 1000;
-
-  if (email && (Date.now() - ts) < sevenDays) {
+  if (email && (Date.now() - ts) < 7 * 24 * 60 * 60 * 1000) {
     document.getElementById('authOverlay').classList.add('hidden');
-    // Re-log the view
     logViewer(email);
   }
-
-  // Enter key triggers auth
   document.getElementById('authEmail').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') handleAuth();
   });
