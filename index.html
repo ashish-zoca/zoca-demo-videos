@@ -4,34 +4,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zoca Platform Demo - Feature Walkthrough Videos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#0f0f13;color:#e4e4e7;line-height:1.6}
-  .hero{text-align:center;padding:60px 24px 40px;background:linear-gradient(135deg,#0f0f13 0%,#1a1a2e 50%,#16213e 100%)}
-  .hero h1{font-size:2.4rem;font-weight:700;background:linear-gradient(135deg,#60a5fa,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
-  .hero p{font-size:1.1rem;color:#a1a1aa;max-width:680px;margin:0 auto}
-  .hero .badge{display:inline-block;margin-top:16px;padding:6px 16px;border-radius:20px;background:rgba(96,165,250,0.15);color:#60a5fa;font-size:0.85rem;font-weight:500}
+  body{font-family:'Inter',sans-serif;background:#240010;color:#FFF3E9;line-height:1.6}
+  h1,h2,h3{font-family:'Montserrat',sans-serif}
+  .hero{text-align:center;padding:60px 24px 40px;background:linear-gradient(135deg,#240010 0%,#64002C 50%,#240010 100%)}
+  .hero h1{font-size:2.4rem;font-weight:800;color:#FF6AAB;margin-bottom:12px;letter-spacing:-0.02em}
+  .hero p{font-size:1.1rem;color:#FFF3E9;opacity:0.8;max-width:680px;margin:0 auto;font-family:'Inter',sans-serif}
+  .hero .badge{display:inline-block;margin-top:16px;padding:6px 16px;border-radius:20px;background:rgba(128,90,255,0.2);color:#805AFF;font-size:0.85rem;font-weight:600;font-family:'Fraunces',serif;font-style:italic}
   .grid{max-width:1280px;margin:0 auto;padding:32px 24px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:28px}
-  .card{background:#1a1a24;border-radius:14px;overflow:hidden;border:1px solid #27273a;transition:transform .2s,border-color .2s,box-shadow .2s}
-  .card:hover{transform:translateY(-4px);border-color:#3b3b5c;box-shadow:0 12px 40px rgba(0,0,0,0.4)}
-  .card video{width:100%;display:block;background:#000}
+  .card{background:#3a0020;border-radius:14px;overflow:hidden;border:1px solid #5a0035;transition:transform .2s,border-color .2s,box-shadow .2s}
+  .card:hover{transform:translateY(-4px);border-color:#FF6AAB;box-shadow:0 12px 40px rgba(255,106,171,0.15)}
+  .card video{width:100%;display:block;background:#1a000e}
   .card-body{padding:18px 20px 20px}
-  .card-body h3{font-size:1.15rem;font-weight:600;color:#f4f4f5;margin-bottom:6px}
-  .card-body p{font-size:0.88rem;color:#71717a;line-height:1.5}
-  .card-body .meta{display:flex;gap:10px;margin-top:10px;font-size:0.78rem;color:#52525b}
+  .card-body h3{font-size:1.15rem;font-weight:700;color:#FFF3E9;margin-bottom:6px}
+  .card-body p{font-size:0.88rem;color:#FFF3E9;opacity:0.65;line-height:1.5}
+  .card-body .meta{display:flex;gap:10px;margin-top:10px;font-size:0.78rem;color:#FF872B;font-family:'Fraunces',serif;font-style:italic}
   .card-body .meta span{display:flex;align-items:center;gap:4px}
   .featured{grid-column:1/-1}
-  .featured .inner{display:grid;grid-template-columns:1.6fr 1fr;gap:0;background:#1a1a24;border-radius:14px;overflow:hidden;border:1px solid #27273a}
+  .featured .inner{display:grid;grid-template-columns:1.6fr 1fr;gap:0;background:#3a0020;border-radius:14px;overflow:hidden;border:1px solid #5a0035}
   .featured video{width:100%;height:100%;object-fit:cover}
   .featured .card-body{padding:32px 28px;display:flex;flex-direction:column;justify-content:center}
   .featured .card-body h3{font-size:1.5rem;margin-bottom:10px}
-  .featured .card-body p{font-size:0.95rem;color:#a1a1aa}
+  .featured .card-body p{font-size:0.95rem;opacity:0.75}
   @media(max-width:800px){
     .grid{grid-template-columns:1fr}
     .featured .inner{grid-template-columns:1fr}
     .hero h1{font-size:1.8rem}
   }
-  footer{text-align:center;padding:32px;color:#3f3f46;font-size:0.82rem;border-top:1px solid #1f1f2e}
+  footer{text-align:center;padding:32px;color:#FFF3E9;opacity:0.35;font-size:0.82rem;border-top:1px solid #5a0035}
 </style>
 </head>
 <body>
@@ -46,7 +50,7 @@
 
   <div class="featured">
     <div class="inner">
-      <video controls preload="metadata" poster="">
+      <video controls preload="metadata">
         <source src="videos/feature1_network_command_center.mp4" type="video/mp4">
       </video>
       <div class="card-body">
